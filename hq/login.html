@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding:0;
+			}
+		</style>
+<script src="react/react.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="react/react-dom.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="react/browser.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box"></div>
+		
+	
+	</body>
+	<script type="text/babel">
+
+
+var ys={width:'90%',lineHeight:'50px',margin:'10px auto'}
+var ys1={width:"75%",height:'30px'}
+var Body=React.createClass({
+	tap:function(){
+		var _this=this;
+		$.ajax({
+			type:"post",
+			url:"http://10.8.158.22:3020",
+			anync:true,
+			data:{name:_this.refs.ipt.value,pass:_this.refs.ipt1.value},
+			success:function(){
+				alert('登录成功')
+			},
+			error:function(err){
+				alert('失败')
+			}
+		});
+	},
+	render:function(){
+		return(
+			<div>
+			<h1 style={{width:'100%',height:'50px',background:'#969696',textAlign:'center',lineHeight:'50px',fontFamily:'楷体',color:'#fff'}}>登录</h1>
+			<div style={ys}>用户：<input style={ys1} type="text" ref="ipt" /><br/></div>
+		    <div style={ys}>密码：<input style={ys1} type="password" ref="ipt1" /><br/></div>
+		   <button style={{width:'90%',height:'40px',background:'#ccc',fontSize:'20px',borderRadius:'5px',marginLeft:'5%',fontFamily:'楷体'}} onClick={this.tap}>登录</button>
+			</div>
+		)
+	}
+})
+
+ReactDOM.render(<Body/>,document.getElementById('box'))
+	</script>
+</html>
+

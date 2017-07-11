@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+	</style>
+<script src="react/react.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="react/react-dom.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="react/browser.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script type="text/babel">
+	var str1={fontSize:'16px',lineHeight:'40px'}
+var Book=React.createClass({
+	getInitialState:function(){
+		return{
+			res:'',
+			arr:[],
+			arr2:[],
+			arr4:[],
+			arr5:[],
+			arr6:[]
+		}
+	},
+	componentWillMount:function(){
+		var arr1=[]
+		var arr3=[]
+		var arr14=[]
+		var arr15=[]
+		var arr16=[]
+		var _this=this
+		$.ajax({
+		type:"get",
+		url:"http://10.8.158.22:3002",
+		async:true,
+		success:function(data){
+			var data=JSON.parse(data);
+			var str1=data[1].gocon1;
+			var str2=data[2].gocon2;
+			var str3=data[3].gocon3;
+			var str4=data[4].gocon4;
+			var str5=data[5].gocon5;
+			console.log(data)
+        for(var i in str1){
+        	arr1.push(str1[i])
+        }
+         for(var i in str2){
+        	arr3.push(str2[i])
+        }
+         for(var i in str3){
+        	arr14.push(str3[i])
+        }
+         for(var i in str4){
+        	arr15.push(str4[i])
+        }
+          for(var i in str5){
+        	arr16.push(str5[i])
+        }
+        _this.setState({res:data[0].goh1})
+        _this.setState({arr:arr1})
+        _this.setState({arr2:arr3})
+        _this.setState({arr4:arr14})
+        _this.setState({arr5:arr15})
+        _this.setState({arr6:arr16})
+        },
+		error:function(){
+			console.log('fail');
+		}	
+	});
+	},
+	render:function(){
+		return(
+			<div>
+			<p style={str1}>{this.state.res}</p>
+			
+			{
+				this.state.arr.map(function(item){
+					return <p style={{fontSize:'12px',textAlign:'center',lineHeight:'30px'}}>{item}</p>
+				})
+			}
+				
+				<img style={{display:'block',width:'100%',marginTop:'10px'}} src="img/file_576cecdf48631.jpg"/>
+			
+			{
+				this.state.arr2.map(function(item){
+					return <p style={{fontSize:'12px',textAlign:'center',lineHeight:'30px'}}>{item}</p>
+				})
+			}
+			
+			<img style={{display:'block',width:'100%',marginTop:'10px'}} src="img/file_576cea1ce3608.jpg"/>
+			
+			{
+				this.state.arr4.map(function(item){
+					return <p style={{fontSize:'12px',textAlign:'center',lineHeight:'30px'}}>{item}</p>
+				})
+			}
+			
+			<img style={{display:'block',width:'100%',marginTop:'10px'}} src="img/file_576b462126fea (2).jpg"/>
+			
+			{
+				this.state.arr5.map(function(item){
+					return <p style={{fontSize:'12px',textAlign:'center',lineHeight:'30px'}}>{item}</p>
+				})
+			}
+			
+			{
+				this.state.arr6.map(function(item){
+					return <p style={{fontSize:'12px',textAlign:'center',lineHeight:'30px',color:'brown'}}>{item}</p>
+				})
+			}
+			
+			</div>
+		)
+	}
+})
+ReactDOM.render(<Book/>,document.getElementById('box'))
+</script>
+</html>
